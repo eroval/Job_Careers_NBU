@@ -40,6 +40,24 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="usertype" class="col-md-4 col-form-label text-md-end">User type:</label>
+
+                            <div class="col-md-6">
+                                <select id="usertype" type="usertype" class="form-control @error('usertype') is-invalid @enderror" name="usertype" value="{{old('usertype')}}" required autocomplete="usertype">
+                                    <option value="CANDIDATE">Candidate</option>
+                                    <option value="CONTRACTOR">Employer</option>
+                                </select>
+                                {{-- <input id="usertype" type="usertype" class="form-control @error('usertype') is-invalid @enderror" name="usertype" value="{{ old('usertype') }}" required autocomplete="usertype"> --}}
+
+                                @error('usertype')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
