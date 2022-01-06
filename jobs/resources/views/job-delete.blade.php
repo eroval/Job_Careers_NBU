@@ -15,7 +15,7 @@
     </head>
     <body class="antialiased" style="height: 100%; width: 80%; margin: auto;">
         @yield('header')
-        @yield('mycontent')
+        @yield('article-delete')
         @yield('myfooter')
 
         <script src="{{ asset('js/app.js') }}"></script>
