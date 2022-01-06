@@ -5,7 +5,7 @@
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
                 .nav-menu a{
-                    color: #30d3db;
+                    color: black;
                     text-decoration: none;
                     margin-left: 10px;
                 }
