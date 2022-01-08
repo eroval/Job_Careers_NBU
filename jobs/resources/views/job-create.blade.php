@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Create Article</title>
+        <title>Create Job Listing</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <style>
@@ -25,13 +25,13 @@
                 {{ session('status') }}
             </div>
             @endif
-            @yield('article-creator')
+            @yield('jobs-creator')
             @yield('myfooter')
 
             <script src="{{ asset('js/app.js') }}"></script>
         @else
             @yield('header')
-            @yield('article-creator-error')
+            @yield('jobs-creator-error')
             @yield('myfooter')
         @endif
     </body>

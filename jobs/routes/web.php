@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobListingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Jobs
+  // Create
+  Route::get('/create-jobs/', [JobListingsController::class, 'create']);
+  Route::post('store-jobs', [JobListingsController::class,'store']);
+
+  // View
+//   Route::get('/', [JobListingsController::class, 'loadStart']);
+//   Route::get('/article/{id}', [JobListingsController::class, 'loadPage']);
+
+//Categories
+    //Create
+    Route::post('create-categories', [CategoriesController::class], 'store');

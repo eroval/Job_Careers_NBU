@@ -13,7 +13,7 @@
         @include('link-style')
 
     </head>
-    <body class="antialiased" style="height: 100%; width: 80%; margin: auto;">
+    <body class="antialiased" style="height: 100%; width: 100%; margin: auto;">
         @yield('header')
         @yield('mycontent')
         @yield('myfooter')

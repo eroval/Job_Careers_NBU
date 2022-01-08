@@ -5,4 +5,18 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
+
+html {
+    height: 100%;;
+}
+
+.my_content{
+    // -webkit-box-shadow: 0px 0px 10px -2px #000000; 
+    // box-shadow: 0px 0px 10px -2px #000000;
+    -webkit-box-shadow: 0px 0px 4px -2px #000000; 
+    box-shadow: 0px 0px 4px -2px #000000;
+    background-color: $bgcontrast;
+    flex-grow: 1;
+}

@@ -1,25 +1,26 @@
 <style>
+
     .my_link a{
-        background-color: black;
+        background-color: #1161a1;
         color: white;
         text-decoration: none;
         font-size: 15px;
         display: inline-block;
-        padding: 0px 10px;
+        padding: 10px 20px;
         margin-right:10px;
-        border-radius: 8px;
+        border-radius: 5px;
         transition: 250ms;
     }
 
 
     .my_link a:hover{
-        background-color: rgb(255, 153, 0);
+        background-color: #d4ebff;
         color: black;
         transition: 250ms;
     }
 
     .hand-button a{
-        background-color: black;
+        background-color: #1161a1;
         color: white;
         text-decoration: none;
         font-size: 24px;
@@ -33,7 +34,7 @@
     }
 
     .hand-button a:hover{
-        background-color: rgb(255, 153, 0);
+        background-color: #d4ebff;
         color: black;
         transition: 250ms;
     }
