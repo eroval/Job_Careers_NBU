@@ -32,6 +32,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //   Route::get('/', [JobListingsController::class, 'loadStart']);
 //   Route::get('/article/{id}', [JobListingsController::class, 'loadPage']);
 
-//Categories
-    //Create
-    Route::post('create-categories', [CategoriesController::class], 'store');

@@ -15,8 +15,8 @@ class CreateCandidacyHistoryTable extends Migration
     {
         Schema::create('candidacy_history', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('candidate_id');
-            $table->bigInteger('contractor_id');
+            $table->bigInteger('candidate_id')->nullable(false);
+            $table->bigInteger('contractor_id')->nullable(false);
             $table->timestamps();
         });
     }

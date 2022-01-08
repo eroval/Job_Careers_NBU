@@ -15,6 +15,9 @@ class CreateJobCategoryTable extends Migration
     {
         Schema::create('job_category', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("category_id")->nullable(false);
+            $table->bigInteger("job_id")->nullable(false);
+            $table->unique(["category_id", "job_id"]);
             $table->timestamps();
         });
     }

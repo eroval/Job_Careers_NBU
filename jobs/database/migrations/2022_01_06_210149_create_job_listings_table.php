@@ -15,9 +15,9 @@ class CreateJobListingsTable extends Migration
     {
         Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->bigInteger('contractor_id');
+            $table->string('title')->nullable(false);
+            $table->string('description')->nullable(false);
+            $table->bigInteger('contractor_id')->nullable(false);
             $table->timestamps();
         });
     }
