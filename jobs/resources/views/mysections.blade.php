@@ -46,16 +46,6 @@
 
             }
 
-            .card-body .form-group input{
-                background-color: #f1f9ff;
-                border-radius: 10px;
-            }
-
-            .card-body .form-group textarea{
-                background-color: #f1f9ff;
-                border-radius: 10px;
-            }
-
 
             .card {
                 border: none;
@@ -63,6 +53,18 @@
                 -webkit-box-shadow: 0px 0px 4px -2px #000000; 
                 box-shadow: 0px 0px 4px -2px #000000;
                 background-color: #ddf0ff;
+            }
+
+            .form-group input {
+                background-color:white;
+                border-style: solid 1px;
+                border-radius: 5px; 
+            }
+
+            .form-group textarea {
+                background-color:white;
+                border-style: solid 1px;
+                border-radius: 5px; 
             }
 
         </style>

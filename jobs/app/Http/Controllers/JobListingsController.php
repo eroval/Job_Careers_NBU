@@ -126,4 +126,23 @@ class JobListingsController extends Controller
         $jobs = $query->orderBy('created_at', 'DESC')->paginate(5);
         return view('welcome', ['jobs'=>$jobs]);
     }
+
+    
+
+    public function deletePage($id){
+        $job = JobListings::findOrFail($id);
+        if(Auth::user() && Auth::user()->id==$job->contractor_id){
+            return view('job-delete', ['job'=>$job]);
+        }
+        abort(403);
+    }
+
+    public function delete($id){
+        $job = JobListings::findOrFail($id);
+        if(Auth::user() && Auth::user()->id==$job->contractor_id){
+            $job->delete();
+            return redirect('/');
+        }
+        abort(403);
+    }
 }
