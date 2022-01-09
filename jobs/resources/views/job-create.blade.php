@@ -16,7 +16,7 @@
         </style>
         @yield('mystyles')
     </head>
-    <body class="antialiased" style="height: 100%; width: 80%; margin: auto;">
+    <body class="antialiased" style="height: 100%;">
         @if (Auth::user())
             @yield('header')
             

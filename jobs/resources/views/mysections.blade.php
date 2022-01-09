@@ -67,12 +67,11 @@
                 <div class="container-fluid" style='display: flex; margin-top: 20px;'>
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <p>what</p>
                             @if ($jobs?? '')
                                 <div class="d-flex flex-fill flex-column">
                                     @foreach($jobs as $element)
                                         <div class="card" style="margin-top: 10px; margin-right:50px;border: 1px solid rgba(0,0,0,45);">
-                                            <h5 class="card-header">{{$element['headline']}}</h5>
+                                            <h5 class="card-header">{{$element['title']}}</h5>
                                             <div class="card-body">
                                                 <div class="card-title">Created by: {{$element['user']}}</div>
                                                 <div class="card-subtitle mb-2 text-muted">Created: {{$element['created_at']}}</div>
@@ -80,7 +79,7 @@
                                                     <div class="my_link">
                                                         <a href="{{url('/jobs/' . $element->id )}}" class="card-link">View</a>
                                                     </div>   
-                                                    @if (Auth::user() && Auth::user()->id == $element->author_id)
+                                                    @if (Auth::user() && Auth::user()->id == $element->contractor_id)
                                                     <div class="my_link">
                                                         <a href="{{url('/edit-jobs/' . $element->id )}}" class="card-link">Edit</a>
                                                     </div>
@@ -101,7 +100,7 @@
                 @if ($jobs?? '')
                         <!-- <div class="d-flex align-items-end justify-content-center"> -->
                         <div class="d-flex justify-content-center" >
-                            <div style="position:absolute;  bottom:0; margin-bottom: 20px;">
+                            <div style="position:absolute;  bottom:0;">
                                 {{ $jobs->links('pagination::bootstrap-4') }}
                             </div>
                         </div>
@@ -143,43 +142,42 @@
             <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
                 <div class="container-fluid" style="display:flex; justify-content: center;" > 
                     <div class="d-flex align-self-center">
-                        <h1>Cannot create jobs without signing in and being a contractor.</h1>
+                        <h1>Cannot create job without signing in and being a contractor.</h1>
                     </div> 
                 </div>
             </div>
         @endsection
 
 
-        @if ($jobs?? '')
+        @if ($job?? '')
         @section('jobs-page')
         <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
             <div class="container-fluid">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h2 class="card-title">{{$jobs['headline']}}</h2>
-                        @if (Auth::user() && Auth::user()->id == $jobs->author_id)
-                            <div class="d-flex">
+                        <h2 class="card-title">{{$job['title']}}</h2>
+                        @if (Auth::user() && Auth::user()->id == $job->contractor_id)
+                            <div class="d-flex align-items-center" style="magin-bottom:-200px;">
                                 <div class="my_link">
-                                    <a href="{{url('/edit-jobs/' . $jobs->id )}}" class="card-link">Edit</a>
+                                    <a href="{{url('/edit-jobs/' . $job->id )}}" class="card-link">Edit</a>
                                 </div>
                                 <div class="my_link">
-                                    <a href="{{url('/confirm-delete-jobs/' . $jobs->id )}}" class="card-link">Delete</a>
+                                    <a href="{{url('/confirm-delete-jobs/' . $job->id )}}" class="card-link">Delete</a>
                                 </div>
                             </div>
                         @endif
                     </div>
+                    <br>
                     @include('mylinebegin')
                     <br>
                     <div>
-                        <textarea readonly name="content" style="background-color: #fcfcfc; height: 720px; overflow-y: auto; resize:none;  width:100%; border:none; outline:none; " >{{$jobs['content']}}</textarea>
+                        <textarea readonly name="content" style="background-color: #ddf0ff; height: 720px; overflow-y: auto; resize:none;  width:100%; border:none; outline:none; " >{{$job['description']}}</textarea>
                     </div>
-                    @include('mylinebegin')
-                    <br>
-                    <p>Created by: {{$jobs['user']}}</p>
+                    <p>Created by: {{$job['user']}}</p>
                     @include('mylinebeginshort')
-                    <p style="margin-top:5px;">Updated: {{$jobs['updated_at']}}</p>
+                    <p style="margin-top:5px;">Updated: {{$job['updated_at']}}</p>
                     @include('mylinebeginshort')
-                    <p style="margin-top:5px;">Created: {{$jobs['created_at']}}</p>
+                    <p style="margin-top:5px;">Created: {{$job['created_at']}}</p>
                     @include('mylinebeginshort')
                 </div>
             </div>
@@ -188,25 +186,25 @@
         @endif
 
         
-        @if ($jobs?? '')
+        @if ($job?? '')
         @section('jobs-editor')
             <div class="my_content" style="display: flex;height: 80%; font-family: 'Cormorant Garamond'; ">
                 <div class="container-fluid">  
                     <div class="card-body">
-                        <form name="edit-jobs" method="POST" action="{{ url('/update-jobs/' . $jobs->id) }}">
+                        <form name="edit-jobs" method="POST" action="{{ url('/update-jobs/' . $job->id) }}">
                             @method('PATCH')
                             @csrf
                             <div class="form-group">
-                                <label for="exampleHeadline">Headline</label>
-                                <input type="text" id="headline" name="headline" class="form-control" value="{{$jobs['headline']}}">
+                                <label for="exampleTitle">Title</label>
+                                <input type="text" id="title" name="title" class="form-control" value="{{$job['title']}}">
                             </div>
                             <div class="form-group">
-                                <label for="exampleTags">Tags</label>
-                                <input type="text" id="tags" name="tags" class="form-control">
+                                <label for="exampleTags">Categories</label>
+                                <input type="text" id="tags" name="tags" class="form-control" value="{{ $job['categories'] }}">
                             </div>
                             <div class="form-group">
                                 <label for="exampleContent">Content</label>
-                                <textarea name="content" style="height: 750px; overflow-y: auto; resize:none;" class="form-control" >{{$jobs['content']}}</textarea>
+                                <textarea name="content" style="height: 750px; overflow-y: auto; resize:none;" class="form-control" >{{$job['content']}}</textarea>
                             </div>  
                             <div style="display: flex; justify-content: center;  margin-top: 10px;">
                                 <a href="{{url('/')}}" class="btn btn-secondary" style="margin-top: 10px; margin-right:10px;">Cancel</a>
@@ -220,15 +218,15 @@
         @endif
 
         
-        @if($jobs?? '')
+        @if($job?? '')
         @section('jobs-delete')
             <div class="my_content" style="display: flex;height: 80%; font-family: 'Cormorant Garamond'; ">
                 <div class="container-fluid" style="display:flex; justify-content: center;" > 
                     <div class="d-flex align-self-center">
-                        <form name="delete-jobs" method="POST" action="{{ url('/delete-jobs/' . $jobs->id) }}">
+                        <form name="delete-jobs" method="POST" action="{{ url('/delete-jobs/' . $job->id) }}">
                             @method('DELETE')
                             @csrf
-                            <h1>Are you sure you want to delete the jobs?</h1>
+                            <h1>Are you sure you want to delete the job?</h1>
                             <div style="display: flex; justify-content: center;  margin-top: 10px;">
                                 <a href="{{url('/')}}" class="btn btn-secondary" style="margin-top: 10px; margin-right:10px;">Cancel</a>
                                 <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left:10px;">Delete</button>
