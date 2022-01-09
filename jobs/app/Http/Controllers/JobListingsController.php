@@ -85,4 +85,45 @@ class JobListingsController extends Controller
         }
         abort(403);
     }
+
+    public function searchPage(){
+        return view('search');
+    }
+
+    public function search(Request $req){
+        $res = $req['search'];
+        $userid = null;
+        try{
+            $userid = User::where('name', 'like', "%" . $res . "%")->get('id');
+            for($i=0; $i<count($userid); ++$i){
+                $userid[$i] = $userid[$i]['id'];
+            }
+        }
+        catch(Exception $e){
+            $userid = null;
+        }
+
+        $job_ids=null;
+        try{
+            $category_ids = Categories::where('name','like', "%" . $res . "%")->get(['id']);
+            $job_ids = JobCategory::whereIn('category_id',$category_ids)->get(['job_id']);
+            for($i=0; $i<count($job_ids); ++$i){
+                $job_ids[$i] = $job_ids[$i]['job_id'];
+            }
+        }
+        catch(Exception $e){
+            $job_ids=null;
+        }
+
+        $query = JobListings::whereIn('contractor_id', $userid)
+                          ->orWhere('title', 'like', "%" . $res . "%")
+                          ->orWhereIn('id', $job_ids);
+        
+        if(!$query->first()){
+            return view ('search-empty', ['job_ids'=>$job_ids, 'user_id'=>$userid]);
+        }
+
+        $jobs = $query->orderBy('created_at', 'DESC')->paginate(5);
+        return view('welcome', ['jobs'=>$jobs]);
+    }
 }

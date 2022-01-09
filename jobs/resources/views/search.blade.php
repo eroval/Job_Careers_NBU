@@ -13,13 +13,9 @@
         @include('link-style')
 
     </head>
-    <body class="antialiased" style="height: 100%; width: 80%; margin: auto;">
+    <body class="antialiased" style="height: 100%;">
         @yield('header')
-        @yield('search-error')
-        <p><?php
-        echo $job_ids . "What'su p";
-        echo $user_id;
-        ?></p>
+        @yield('search')
         @yield('myfooter')
 
         <script src="{{ asset('js/app.js') }}"></script>

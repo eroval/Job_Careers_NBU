@@ -36,10 +36,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
   Route::get('/edit-jobs/{id}', [JobListingsController::class, 'editPage']);
   Route::patch('/update-jobs/{id}', [JobListingsController::class, 'updateJobs']);
 
-  // Delete
-  Route::get('/confirm-delete-jobs/{id}', [JobListingsController::class, 'deletePage']);
-  Route::delete('/delete-jobs/{id}',[JobListingsController::class, 'delete']);
-
   // Search
   Route::get('/search-jobs/', [JobListingsController::class, 'searchPage']);
   Route::get('/search-result/', [JobListingsController::class, 'search']);
+
+  // Delete
+  Route::get('/confirm-delete-jobs/{id}', [JobListingsController::class, 'deletePage']);
+  Route::delete('/delete-jobs/{id}',[JobListingsController::class, 'delete']);
