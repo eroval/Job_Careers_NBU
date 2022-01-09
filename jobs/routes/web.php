@@ -43,3 +43,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
   // Delete
   Route::get('/confirm-delete-jobs/{id}', [JobListingsController::class, 'deletePage']);
   Route::delete('/delete-jobs/{id}',[JobListingsController::class, 'delete']);
+
+//Categories
+  // View
+  Route::get('/categories', [CategoriesController::class, 'loadStart']);
+  Route::get('/categories/{id}', [CategoriesController::class, 'loadPage']);

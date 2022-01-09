@@ -126,6 +126,47 @@
                 @endif
             </div>
         @endsection
+
+        @section('categories')
+            <div class="my_content" style="position: relative; display: flex; flex-direction:column; height: 80%;">
+                <div class="container-fluid" style='display: flex; margin-top: 20px;'>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            @if ($categories?? '')
+                             <?php $i=0;?>
+                                @while($i<count($categories))
+                                <div class="d-flex flex-column">
+                                    <?php $j=0 ?>
+                                    @while($i<count($categories)&&$j<6)
+                                        <div class="card" style="margin-top: 30px;margin-right:50px;margin-left:50px; background-color:rgb(255, 255, 255); color:#292929;">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><a href="{{url('/categories/' . $categories[$i]->id )}}" style="text-decoration: none; color:#292929;">{{$categories[$i]['name']}}</a></h5>
+                                                <div class="d-flex flex-row">
+                                                    <div class="my_link">
+                                                        <a href="{{url('/categories/' . $categories[$i]->id )}}" class="card-link">View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php ++$j; ++$i; ?>
+                                    @endwhile
+                                </div>
+                                @endwhile 
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                        
+                @if ($categories?? '')
+                        <!-- <div class="d-flex align-items-end justify-content-center"> -->
+                        <div class="d-flex justify-content-center" >
+                            <div style="position:absolute;  bottom:0;">
+                                {{ $categories->links('pagination::bootstrap-4') }}
+                            </div>
+                        </div>
+                @endif
+            </div>
+        @endsection
         
 
         @section('jobs-creator')

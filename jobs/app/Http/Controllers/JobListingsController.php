@@ -120,7 +120,7 @@ class JobListingsController extends Controller
                           ->orWhereIn('id', $job_ids);
         
         if(!$query->first()){
-            return view ('search-empty', ['job_ids'=>$job_ids, 'user_id'=>$userid]);
+            return view ('search-empty');
         }
 
         $jobs = $query->orderBy('created_at', 'DESC')->paginate(5);

@@ -42,7 +42,7 @@
                     </div>
                     <div class="nav-menu">
                             <a href="{{url('/')}}">Home</a>
-                            <a href="#">Categories</a>
+                            <a href="{{url('/categories')}}">Categories</a>
                             <a href="{{url('/search-jobs')}}">Search</a>
                     </div>
                 </div>
