@@ -199,12 +199,12 @@
                                 <input type="text" id="title" name="title" class="form-control" value="{{$job['title']}}">
                             </div>
                             <div class="form-group">
-                                <label for="exampleTags">Categories</label>
-                                <input type="text" id="tags" name="tags" class="form-control" value="{{ $job['categories'] }}">
+                                <label for="exampleCategories">Categories</label>
+                                <input type="text" id="categories" name="categories" class="form-control" value="{{ $job['categories'] }}">
                             </div>
                             <div class="form-group">
-                                <label for="exampleContent">Content</label>
-                                <textarea name="content" style="height: 750px; overflow-y: auto; resize:none;" class="form-control" >{{$job['content']}}</textarea>
+                                <label for="exampleDescription">Description</label>
+                                <textarea name="description" style="height: 750px; overflow-y: auto; resize:none;" class="form-control" >{{$job['description']}}</textarea>
                             </div>  
                             <div style="display: flex; justify-content: center;  margin-top: 10px;">
                                 <a href="{{url('/')}}" class="btn btn-secondary" style="margin-top: 10px; margin-right:10px;">Cancel</a>

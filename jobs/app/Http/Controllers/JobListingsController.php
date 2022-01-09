@@ -24,13 +24,10 @@ class JobListingsController extends Controller
 
     private static function getCategoriesByJob($job){
         $categories_id = JobCategory::where('job_id','=',$job->id)->get(['category_id']);
-        $categories = strval($categories_id[0]['category_id']);
+        $categories = strval(self::getCategoriesByCategoryId($categories_id[0]['category_id']));
         for($i=1; $i<count($categories_id); ++$i){
-            $categories = $categories . ',' . strval($categories_id[$i]['category_id']);
+            $categories = $categories . '  ,  ' . strval(self::getCategoriesByCategoryId($categories_id[$i]['category_id']));
         }
-        // foreach($category_ids as $val){
-        //     $val = self::getCategoriesByCategoryId($val['category_id']);
-        // }
         return $categories;
     }
 
@@ -74,16 +71,18 @@ class JobListingsController extends Controller
         abort(403);
     }
 
-    // public function updateArticle(Request $req){
-    //     if(Auth::user()){
-    //         $article = Article::findOrFail($req->id);
-    //         if($article->author_id==Auth::user()->id){
-    //             $article->headline=$req->headline;
-    //             $article->content=$req->content;
-    //             $article->save();
-    //         }
-    //         return redirect('edit-article/' . $article->id)->with('status', 'successfully updated');
-    //     }
-    //     abort(403);
-    // }
+    public function updateJobs(Request $req){
+        if(Auth::user()){
+            $job = JobListings::findOrFail($req->id);
+            if($job->contractor_id==Auth::user()->id){
+                $job->title=$req->title;
+                $job->description=$req->description;
+                $job->save();
+                (new JobCategoryController)->delete($job->id);
+                (new CategoriesController)->store($req->categories, $job->id);
+            }
+            return redirect('edit-article/' . $job->id)->with('status', 'successfully updated');
+        }
+        abort(403);
+    }
 }
