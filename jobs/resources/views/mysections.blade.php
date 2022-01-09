@@ -15,9 +15,6 @@
                 margin: 0 auto;
                 margin-top:20px;
                 margin-bottom:20px;
-                -webkit-box-shadow: 0px 0px 4px -2px #000000; 
-                box-shadow: 0px 0px 4px -2px #000000;
-                background-color: #ddf0ff;
                 flex-grow: 1;
             }
 
@@ -30,13 +27,13 @@
             }
             
             .my_line_begin{
-                padding: 0.5px;
+                padding: 1px;
                 background: rgb(0,0,0); 
                 background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
             }
 
             .my_line_begin_short{
-                padding: 0.5px;
+                padding: 1px;
                 background: rgb(0,0,0); 
                 background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%);
             }
@@ -48,6 +45,26 @@
                 font-family: 'Nunito', sans-serif;
 
             }
+
+            .card-body .form-group input{
+                background-color: #f1f9ff;
+                border-radius: 10px;
+            }
+
+            .card-body .form-group textarea{
+                background-color: #f1f9ff;
+                border-radius: 10px;
+            }
+
+
+            .card {
+                border: none;
+                border-radius: 10px;
+                -webkit-box-shadow: 0px 0px 4px -2px #000000; 
+                box-shadow: 0px 0px 4px -2px #000000;
+                background-color: #ddf0ff;
+            }
+
         </style>
         @endsection
         
@@ -70,11 +87,11 @@
                             @if ($jobs?? '')
                                 <div class="d-flex flex-fill flex-column">
                                     @foreach($jobs as $element)
-                                        <div class="card" style="margin-top: 10px; margin-right:50px;border: 1px solid rgba(0,0,0,45);">
-                                            <h5 class="card-header">{{$element['title']}}</h5>
+                                        <div class="card" style="margin-top: 30px;margin-right:50px;margin-left:50px; background-color:rgb(255, 255, 255); color:#292929;">
                                             <div class="card-body">
-                                                <div class="card-title">Created by: {{$element['user']}}</div>
-                                                <div class="card-subtitle mb-2 text-muted">Created: {{$element['created_at']}}</div>
+                                                <h5 class="card-title"><a href="{{url('/jobs/' . $element->id )}}" style="text-decoration: none; color:#292929;">{{$element['title']}}</a></h5>
+                                                <div class="card-subtitle">Created by: {{$element['user']}}</div>
+                                                <div class="card-subtitle mb-2">Created: {{$element['created_at']}}</div>
                                                 <div class="d-flex flex-row">
                                                     <div class="my_link">
                                                         <a href="{{url('/jobs/' . $element->id )}}" class="card-link">View</a>
@@ -110,7 +127,7 @@
         
 
         @section('jobs-creator')
-            <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
+            <div class="my_content" style="display: flex; height: 80%;">
                 <div class="container-fluid">  
                     <div class="card-body">
                         <form name="create-jobs" id='create-jobs' method="POST" action="{{ url('store-jobs') }}">
@@ -139,7 +156,7 @@
         
 
         @section('jobs-creator-error')
-            <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
+            <div class="my_content" style="display: flex; height: 80%;">
                 <div class="container-fluid" style="display:flex; justify-content: center;" > 
                     <div class="d-flex align-self-center">
                         <h1>Cannot create job without signing in and being a contractor.</h1>
@@ -151,7 +168,7 @@
 
         @if ($job?? '')
         @section('jobs-page')
-        <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
+        <div class="my_content" style="display: flex; height: 80%;">
             <div class="container-fluid">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -171,7 +188,7 @@
                     @include('mylinebegin')
                     <br>
                     <div>
-                        <textarea readonly name="content" style="background-color: #ddf0ff; height: 720px; overflow-y: auto; resize:none;  width:100%; border:none; outline:none; " >{{$job['description']}}</textarea>
+                        <textarea readonly name="content" style="background-color: #f8fafc; height: 720px; overflow-y: auto; resize:none;  width:100%; border:none; outline:none; border-radius:10px; " >{{$job['description']}}</textarea>
                     </div>
                     <p>Created by: {{$job['user']}}</p>
                     @include('mylinebeginshort')
@@ -188,7 +205,7 @@
         
         @if ($job?? '')
         @section('jobs-editor')
-            <div class="my_content" style="display: flex;height: 80%; font-family: 'Cormorant Garamond'; ">
+            <div class="my_content" style="display: flex;height: 80%;">
                 <div class="container-fluid">  
                     <div class="card-body">
                         <form name="edit-jobs" method="POST" action="{{ url('/update-jobs/' . $job->id) }}">
@@ -220,7 +237,7 @@
         
         @if($job?? '')
         @section('jobs-delete')
-            <div class="my_content" style="display: flex;height: 80%; font-family: 'Cormorant Garamond'; ">
+            <div class="my_content" style="display: flex;height: 80%;">
                 <div class="container-fluid" style="display:flex; justify-content: center;" > 
                     <div class="d-flex align-self-center">
                         <form name="delete-jobs" method="POST" action="{{ url('/delete-jobs/' . $job->id) }}">
@@ -239,7 +256,7 @@
         @endif
 
         @section('search')
-            <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
+            <div class="my_content" style="display: flex; height: 80%;">
                     <div class="container-fluid" style="display:flex; justify-content: center;" > 
                         <div class="d-flex flex-fill align-self-center justify-content-center">
                             <form name="search-jobs" method="GET" style="width:60%;" action="{{ url('/search-result')}}">
@@ -259,7 +276,7 @@
         
         
         @section('search-error')
-            <div class="my_content" style="display: flex; height: 80%; font-family: 'Cormorant Garamond'; ">
+            <div class="my_content" style="display: flex; height: 80%;">
                 <div class="container-fluid" style="display:flex; justify-content: center;" > 
                     <div class="d-flex align-self-center">
                         <h1>Nothing was found</h1>
