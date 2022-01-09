@@ -78,10 +78,10 @@ class JobListingsController extends Controller
                 $job->title=$req->title;
                 $job->description=$req->description;
                 $job->save();
-                (new JobCategoryController)->delete($job->id);
+                (new JobCategoryController)->deleteByJobId($job->id);
                 (new CategoriesController)->store($req->categories, $job->id);
             }
-            return redirect('edit-article/' . $job->id)->with('status', 'successfully updated');
+            return redirect('edit-jobs/' . $job->id)->with('status', 'successfully updated');
         }
         abort(403);
     }

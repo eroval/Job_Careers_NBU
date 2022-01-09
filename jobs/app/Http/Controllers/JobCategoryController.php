@@ -22,7 +22,6 @@ class JobCategoryController extends Controller
     }
 
     public function deleteByJobId($job_id){
-        $allListings = JobCategory::where('job_id','=',$job_id)->get();
-        $allListings->delete();
+        JobCategory::where('job_id','=',$job_id)->delete();
     }
 }
