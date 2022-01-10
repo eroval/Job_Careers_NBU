@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobListingsController;
+use App\Mail\CandidateMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//email
+Route::get('/email', function(){
+  return new CandidateMail();
+});
 
 //Jobs
   // Create
@@ -48,3 +54,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
   // View
   Route::get('/categories', [CategoriesController::class, 'loadStart']);
   Route::get('/categories/{id}', [CategoriesController::class, 'loadPage']);
+
+  // Apply & email
+  Route::get('/apply/{id}', [JobListingsController::class, 'loadApply']);
+  Route::post('/apply-job/{id}', [JobListingsController::class, 'sendApply']);

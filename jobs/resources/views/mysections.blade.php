@@ -98,6 +98,11 @@
                                                     <div class="my_link">
                                                         <a href="{{url('/jobs/' . $element->id )}}" class="card-link">View</a>
                                                     </div>   
+                                                    @if (Auth::user() && Auth::user()->usertype=='CANDIDATE')
+                                                    <div class="my_link">
+                                                        <a href="{{url('/apply/' . $element->id )}}" class="card-link">Apply</a>
+                                                    </div>
+                                                    @endif
                                                     @if (Auth::user() && Auth::user()->id == $element->contractor_id)
                                                     <div class="my_link">
                                                         <a href="{{url('/edit-jobs/' . $element->id )}}" class="card-link">Edit</a>
@@ -298,6 +303,7 @@
         @endsection
         @endif
 
+
         @section('search')
             <div class="my_content" style="display: flex; height: 80%;">
                     <div class="container-fluid" style="display:flex; justify-content: center;" > 
@@ -315,7 +321,6 @@
                     </div>
             </div>
         @endsection
-
         
         
         @section('search-error')
