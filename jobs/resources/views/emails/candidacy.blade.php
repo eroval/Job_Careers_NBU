@@ -1,12 +1,11 @@
 @component('mail::message')
-# Introduction
+# You have a new Application!
+## {{ Auth::user()->name }} 
 
-The body of your message.
+has applied for the position: \
+&nbsp; *{{ $job_name}}*
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
 
-Thanks,<br>
+Thank You for choosing us,<br>
 {{ config('app.name') }}
 @endcomponent

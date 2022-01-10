@@ -157,13 +157,12 @@ class JobListingsController extends Controller
 
     public function sendApply(Request $req){
         if(Auth::user() && Auth::user()->usertype=='CANDIDATE'){
-            $id = $req->id;
-            $job = JobListings::findOrFail($id);
-            $subject = $job->name . " Application";
+            $job = JobListings::findOrFail($req->id);
+            $subject = $job->title . " Application";
             $contractor = User::findOrFail($job->contractor_id);
             $email = 'denisimo_98@yahoo.com';//$contractor->email;
             $filename = $req->file('file')->getRealPath();
-            Mail::to($email)->send(new CandidateMail($filename, $subject));
+            Mail::to($email)->send(new CandidateMail($filename, $subject, $job->title));
             return redirect('apply/' . $req->id)->with('status','successfully sent');
         }
         abort(403);

@@ -16,10 +16,11 @@ class CandidateMail extends Mailable
      *
      * @return void
      */
-    public function __construct($filename, $subject)
+    public function __construct($filename, $subject, $job_name)
     {
         $this->filename=$filename;
         $this->subject=$subject;
+        $this->job_name=$job_name;
     }
 
     /**
@@ -29,8 +30,8 @@ class CandidateMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.candidacy')
-                    ->attach($this->filename)
-                    ->subject($this->subject);
+        return $this->markdown('emails.candidacy', ['job_name' => $this->job_name])
+                    ->subject($this->subject)
+                    ->attach($this->filename);
     }
 }
