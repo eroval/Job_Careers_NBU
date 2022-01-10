@@ -32,6 +32,9 @@ class CandidateMail extends Mailable
     {
         return $this->markdown('emails.candidacy', ['job_name' => $this->job_name])
                     ->subject($this->subject)
-                    ->attach($this->filename);
+                    ->attach($this->filename->getRealPath(), array(
+                        'as' => $this->filename->getClientOriginalName(),
+                        'mime' => $this->filename->getMimeType())
+                    );
     }
 }

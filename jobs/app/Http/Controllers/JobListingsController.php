@@ -161,7 +161,7 @@ class JobListingsController extends Controller
             $subject = $job->title . " Application";
             $contractor = User::findOrFail($job->contractor_id);
             $email = 'denisimo_98@yahoo.com';//$contractor->email;
-            $filename = $req->file('file')->getRealPath();
+            $filename = $req->file('file');
             Mail::to($email)->send(new CandidateMail($filename, $subject, $job->title));
             return redirect('apply/' . $req->id)->with('status','successfully sent');
         }

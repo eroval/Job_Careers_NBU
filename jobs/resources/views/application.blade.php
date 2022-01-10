@@ -22,7 +22,7 @@
                     @csrf
                         <h3 class="text-center mb-5">Upload CV</h3>
                         <div class="form-group">
-                            <input type="file" id="file" name="file" class="form-control">
+                            <input type="file" name="file"  id="file" class="form-control"  required="">
                         </div>
                         <div style="display: flex; justify-content: center; margin-top: 10px;">
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Submit</button>
