@@ -53,3 +53,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
   // Apply & email
   Route::get('/apply/{id}', [JobListingsController::class, 'loadApply']);
   Route::post('/apply-job/{id}', [JobListingsController::class, 'sendApply']);
+
+//Get Applicant Applications:
+  Route::get('/my-applications', [JobListingsController::class, 'loadMyApplications']);

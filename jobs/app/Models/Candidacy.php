@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidacy extends Model
 {
+    protected $table = "candidacy_history";
     use HasFactory;
 }

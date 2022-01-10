@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobListings;
 use App\Http\Controllers\CategoriesController;
 use App\Mail\CandidateMail;
+use App\Models\Candidacy;
 use App\Models\Categories;
 use App\Models\User;
 use Exception;
@@ -163,8 +164,30 @@ class JobListingsController extends Controller
             $email = 'denisimo_98@yahoo.com';//$contractor->email;
             $filename = $req->file('file');
             Mail::to($email)->send(new CandidateMail($filename, $subject, $job->title));
+            $candidacy = new Candidacy();
+            $candidacy->candidate_id = Auth::user()->id;
+            $candidacy->job_id = $req->id;
+            $candidacy->save();
             return redirect('apply/' . $req->id)->with('status','successfully sent');
         }
         abort(403);
+    }
+
+    public function loadMyApplications(){
+        try{
+            $job_ids = Candidacy::where('candidate_id','=',Auth::user()->id)->get(['job_id']);
+            for($i=0; $i<count($job_ids); ++$i){
+                $job_ids[$i] = $job_ids[$i]['job_id'];
+            }
+            $query = JobListings::whereIn('id', $job_ids);
+            $allJobs = $query->orderBy('created_at','DESC')->paginate(5);
+            foreach($allJobs as $val){
+                $val['user'] = self::getUserNameByJob($val);
+            }
+            return view('welcome', ['jobs'=>$allJobs]);
+        }
+        catch(Exception $e){
+            return view('search-empty');
+        }
     }
 }

@@ -41,6 +41,9 @@
                         <h1><a href="{{ url('/') }}" style="text-decoration: none; color:black">Job Careers NBU</a></h1>
                     </div>
                     <div class="nav-menu">
+                            @if(Auth::user()&&Auth::user()->usertype=='CANDIDATE')
+                            <a href="{{url('/my-applications')}}">My Applications</a>
+                            @endif
                             <a href="{{url('/')}}">Home</a>
                             <a href="{{url('/categories')}}">Categories</a>
                             <a href="{{url('/search-jobs')}}">Search</a>
