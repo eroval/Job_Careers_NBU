@@ -24,11 +24,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//email
-Route::get('/email', function(){
-  return new CandidateMail();
-});
-
 //Jobs
   // Create
   Route::get('/create-jobs/', [JobListingsController::class, 'create']);
