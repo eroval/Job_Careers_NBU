@@ -35,7 +35,10 @@ class JobListingsController extends Controller
     }
 
     public function create(){
-        return view('job-create');
+        if(Auth::user() && Auth::user()->usertype=='CONTRACTOR'){
+            return view('job-create');
+        }
+        abort(403);
     }
 
     public function store(Request $req){

@@ -50,9 +50,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
   Route::get('/categories', [CategoriesController::class, 'loadStart']);
   Route::get('/categories/{id}', [CategoriesController::class, 'loadPage']);
 
+//Email & History
   // Apply & email
   Route::get('/apply/{id}', [JobListingsController::class, 'loadApply']);
   Route::post('/apply-job/{id}', [JobListingsController::class, 'sendApply']);
 
-//Get Applicant Applications:
+  //Get Applicant Applications:
   Route::get('/my-applications', [JobListingsController::class, 'loadMyApplications']);
