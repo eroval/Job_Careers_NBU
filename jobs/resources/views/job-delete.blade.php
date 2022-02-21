@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Newsfeed</title>
+        <title>Confirm Deletion</title>
 
         @yield('mystyles')
         <!-- Special Styling for the buttons -->
@@ -15,7 +15,7 @@
     </head>
     <body class="antialiased" style="height: 100%;">
         @yield('header')
-        @yield('mycontent')
+        @yield('jobs-delete')
         @yield('myfooter')
 
         <script src="{{ asset('js/app.js') }}"></script>

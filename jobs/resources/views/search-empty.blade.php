@@ -13,9 +13,9 @@
         @include('link-style')
 
     </head>
-    <body class="antialiased" style="height: 100%;">
+    <body class="antialiased" style="height: 100%; ">
         @yield('header')
-        @yield('mycontent')
+        @yield('search-error')
         @yield('myfooter')
 
         <script src="{{ asset('js/app.js') }}"></script>

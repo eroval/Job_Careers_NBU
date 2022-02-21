@@ -15,7 +15,7 @@
     </head>
     <body class="antialiased" style="height: 100%;">
         @yield('header')
-        @yield('mycontent')
+        @yield('search')
         @yield('myfooter')
 
         <script src="{{ asset('js/app.js') }}"></script>
